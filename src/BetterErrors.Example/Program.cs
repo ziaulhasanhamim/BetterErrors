@@ -25,7 +25,7 @@ Result<string[]> GetTextCommaSeparated() => ReadFile().Map<string[]>(txt =>
     {
         return strArr;
     }
-    return new FailureError("No commas found in the file", "NoComma");
+    return new Error("No commas found in the file", "NoComma");
 });
 
-public record FileNotFoundError(string Message) : FailureError(Message, "FileNotFound");
+public record FileNotFoundError(string Message) : Error(Message, "FileNotFound");

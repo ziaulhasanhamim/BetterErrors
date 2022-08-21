@@ -4,6 +4,23 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>BetterErrors</PackageId>
+		<Title>BetterErrors</Title>
+		<Version>1.0.0</Version>
+		<Authors>Ziaul Hasan Hamim</Authors>
+		<Description>A very simple discriminated union of success or error</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>bettererrors;result;exceptions;functional-error;discriminated-union;</PackageTags>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<RepositoryUrl>https://github.com/ziaulhasanhamim/BetterErrors</RepositoryUrl>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<NoWarn>1591;1573</NoWarn>
+        <PackageIcon>icon.png</PackageIcon>
     </PropertyGroup>
+
+    <ItemGroup>
+		<None Include="../../assets/icon.png" Pack="true" PackagePath="" />
+	</ItemGroup>
 
 </Project>

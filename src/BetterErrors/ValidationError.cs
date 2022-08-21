@@ -10,4 +10,4 @@ public record ValidationError(
     string Message, 
     IEnumerable<FieldErrorInfo> ErrorInfos, 
     string? Code = nameof(ValidationError)
-) : FailureError(Message, Code);
+) : Error(Message, Code);

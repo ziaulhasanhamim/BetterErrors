@@ -1,58 +1,44 @@
 namespace BetterErrors;
 
-public readonly struct Result<T>
+public readonly struct Result
 {
-    private readonly T? _obj;
-    private readonly IError? _error;
+    private readonly Result<bool> _result;
 
-    public Result(T obj)
+    private Result(bool _)
     {
-        Success = true;
-        _error = default;
-        _obj = obj;
+        _result = new(true);
     }
 
-    public Result(IError err)
+    internal Result(IError err)
     {
-        Success = false;
-        _obj = default;
-        _error = err;
+        _result = new(err);
     }
 
-    public bool Success { get; }
+    public bool IsSuccess => _result.IsSuccess;
 
-    public T Value => Success switch
-    {
-        true => _obj!,
-        false => throw new InvalidOperationException("Result doesn't contain success value")
-    };
+    public bool IsFailure => _result.IsFailure;
 
-    public IError Error => Success switch
-    {
-        true => throw new InvalidOperationException("Result doesn't contain error value"),
-        false => _error!
-    };
+    public IError Error => _result.Error;
 
-    public TMap Match<TMap>(Func<T, TMap> success, Func<IError, TMap> failure) =>
-        Success ? success(_obj!) : failure(_error!);
+    public TMap Match<TMap>(Func<TMap> success, Func<IError, TMap> failure) =>
+        _result.Match(_ => success(), failure);
 
-    public void Switch(Action<T> success, Action<IError> failure)
-    {
-        if (Success)
-        {
-            success(_obj!);
-            return;
-        }
-        failure(_error!);
-    }
+    public void Switch(Action success, Action<IError> failure) => 
+        _result.Switch(_ => success(), failure);
 
-    public Result<TMap> Map<TMap>(Func<T, Result<TMap>> success) => Success switch
-    {
-        true => success(_obj!),
-        false => _error!.ToResult<TMap>()
-    };
+    public static implicit operator Result(Error err) => Result.FromErr(err);
 
-    public static implicit operator Result<T>(T obj) => new(obj);
+    public static implicit operator Result(AggregateError err) => Result.FromErr(err);
 
-    public static implicit operator Result<T>(FailureError err) => new(err);
+    public static implicit operator Result(IError[] errors) => new AggregateError(errors);
+
+    public static implicit operator Result(List<IError> errors) => new AggregateError(errors);
+
+    public static Result FromErr(IError err) => new(err);
+
+    public static Result Success = new(true);
+
+    public static Result<T> FromErr<T>(IError err) => new(err);
+
+    public static Result<T> From<T>(T value) => new(value);
 }
