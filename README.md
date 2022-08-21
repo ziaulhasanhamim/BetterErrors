@@ -84,7 +84,7 @@ public Result<User> CreateUser(string name, string email)
 ```csharp
 public Task<ErrorOr<User>> AddUserAsync(string name, string email)
 {
-    return CreateUser(name, email).Map(async user => 
+    return CreateUser(name, email).Map<User>(async user => // Note: You have to pass the generic type parameter explicitly for map method
     {
         await _dbContext.AddAsync(user);
         return user;
@@ -180,8 +180,24 @@ result.Switch(
 
 Map method takes a delegate which will transform success result to `Result<TMap>`. The delegate will only be called if `Result<T>` contains a success result. If `Result<T>` is contains a failure result then a `Result<TMap>` will be constructed with the errors inside `Result<T>`
 
+
 ```csharp
-Result<string> userNameResult = userResult.Map(user => user.Username);
+Result<string> userNameResult = userResult.Map<string>(user => user.Username);
+```
+
+**Note: Pass the generic type parameter explicitly for Map method**
+
+You can even return error in Map method
+
+```csharp
+Result<string> userNameResult = userResult.Map<string>(user => 
+{
+    if(user.HasName)
+    {
+        return user.Username;
+    }
+    return new Error("user doesn't have username");
+});
 ```
 
 ## Result without a type

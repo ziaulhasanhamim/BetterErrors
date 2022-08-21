@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterErrors", "src\BetterE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterErrors.Example", "src\BetterErrors.Example\BetterErrors.Example.csproj", "{6E357D1B-3E34-45BB-AA14-F758B3C3F333}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C23344BD-C75E-4A75-A866-D3D45CFBE031}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterErrors.Tests", "tests\BetterErrors.Tests\BetterErrors.Tests.csproj", "{476BEC67-A03A-479D-8199-949F5230ED10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +30,14 @@ Global
 		{6E357D1B-3E34-45BB-AA14-F758B3C3F333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E357D1B-3E34-45BB-AA14-F758B3C3F333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E357D1B-3E34-45BB-AA14-F758B3C3F333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{476BEC67-A03A-479D-8199-949F5230ED10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476BEC67-A03A-479D-8199-949F5230ED10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476BEC67-A03A-479D-8199-949F5230ED10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476BEC67-A03A-479D-8199-949F5230ED10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C5185B6D-E910-43C9-B0E6-F42869E0DB4E} = {23B69C7C-7FCB-4E54-95D2-EC97AD8AB86C}
 		{6E357D1B-3E34-45BB-AA14-F758B3C3F333} = {23B69C7C-7FCB-4E54-95D2-EC97AD8AB86C}
+		{476BEC67-A03A-479D-8199-949F5230ED10} = {C23344BD-C75E-4A75-A866-D3D45CFBE031}
 	EndGlobalSection
 EndGlobal

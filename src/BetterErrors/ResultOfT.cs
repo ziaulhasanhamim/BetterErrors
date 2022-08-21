@@ -1,5 +1,8 @@
 namespace BetterErrors;
 
+/// <summary>
+/// A discriminated union of T or IError
+/// </summary>
 public readonly struct Result<T>
 {
     private readonly T? _value;
@@ -59,7 +62,7 @@ public readonly struct Result<T>
         true => success(_value!),
         false => ValueTask.FromResult(_error!.ToResult<TMap>())
     };
-
+    
     public static implicit operator Result<T>(T value) => Result.From(value);
 
     public static implicit operator Result<T>(Error err) => Result.FromErr<T>(err);
