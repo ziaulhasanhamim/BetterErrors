@@ -1,6 +1,6 @@
 namespace BetterErrors.Tests;
 
-public class ResultTests
+public sealed class ResultTests
 {
     [Fact]
     public void Result_WhenSuccess()

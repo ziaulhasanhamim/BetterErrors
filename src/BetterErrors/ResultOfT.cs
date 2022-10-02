@@ -3,7 +3,7 @@ namespace BetterErrors;
 /// <summary>
 /// A discriminated union of T or IError
 /// </summary>
-public readonly struct Result<T>
+public readonly struct Result<T> : IBetterResult<T>
 {
     private readonly T? _value;
     private readonly IError? _error;
@@ -38,6 +38,12 @@ public readonly struct Result<T>
         false => _error!
     };
 
+    bool IBetterResult.IsSuccess => throw new NotImplementedException();
+
+    bool IBetterResult.IsFailure => throw new NotImplementedException();
+
+    IError IBetterResult.Error => throw new NotImplementedException();
+
     public TMap Match<TMap>(Func<T, TMap> success, Func<IError, TMap> failure) =>
         IsSuccess ? success(_value!) : failure(_error!);
 
@@ -62,7 +68,13 @@ public readonly struct Result<T>
         true => success(_value!),
         false => ValueTask.FromResult(_error!.ToResult<TMap>())
     };
-    
+
+    TMap IBetterResult.Match<TMap>(Func<TMap> success, Func<IError, TMap> failure) =>
+        Match(_ => success(), failure);
+
+    void IBetterResult.Switch(Action success, Action<IError> failure) =>
+        Switch(_ => success(), failure);
+
     public static implicit operator Result<T>(T value) => Result.From(value);
 
     public static implicit operator Result<T>(Error err) => Result.FromErr<T>(err);

@@ -1,8 +1,8 @@
 namespace BetterErrors;
 
 public readonly record struct FieldErrorInfo(
-    string Key, 
-    string Message, 
+    string Key,
+    string Message,
     string? ErrorCode = null
 );
 

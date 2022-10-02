@@ -1,6 +1,6 @@
 namespace BetterErrors;
 
-public readonly struct Result
+public readonly struct Result : IBetterResult
 {
     private readonly Result<bool> _result;
 
@@ -23,7 +23,7 @@ public readonly struct Result
     public TMap Match<TMap>(Func<TMap> success, Func<IError, TMap> failure) =>
         _result.Match(_ => success(), failure);
 
-    public void Switch(Action success, Action<IError> failure) => 
+    public void Switch(Action success, Action<IError> failure) =>
         _result.Switch(_ => success(), failure);
 
     public static implicit operator Result(Error err) => Result.FromErr(err);
@@ -36,7 +36,7 @@ public readonly struct Result
 
     public static Result FromErr(IError err) => new(err);
 
-    public static Result Success = new(true);
+    public static readonly Result Success = new(true);
 
     public static Result<T> FromErr<T>(IError err) => new(err);
 
