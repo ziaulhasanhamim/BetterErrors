@@ -1,6 +1,6 @@
-namespace BetterErrors;
+namespace BetterErrors.Internals;
 
-public interface IBetterResult<T> : IBetterResult
+public interface IBetterResult<T> : IBetterObjectResult
 {
     TMap Match<TMap>(Func<T, TMap> success, Func<IError, TMap> failure);
 

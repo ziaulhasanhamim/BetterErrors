@@ -1,3 +1,5 @@
+using BetterErrors.Internals;
+
 namespace BetterErrors;
 
 public readonly struct Result : IBetterResult

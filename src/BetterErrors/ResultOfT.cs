@@ -1,3 +1,5 @@
+using BetterErrors.Internals;
+
 namespace BetterErrors;
 
 /// <summary>
@@ -74,6 +76,8 @@ public readonly struct Result<T> : IBetterResult<T>
 
     void IBetterResult.Switch(Action success, Action<IError> failure) =>
         Switch(_ => success(), failure);
+
+    object IBetterObjectResult.GetResultValue() => Value!;
 
     public static implicit operator Result<T>(T value) => Result.From(value);
 

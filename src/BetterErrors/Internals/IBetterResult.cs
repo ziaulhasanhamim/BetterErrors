@@ -1,4 +1,4 @@
-namespace BetterErrors;
+namespace BetterErrors.Internals;
 
 public interface IBetterResult
 {
